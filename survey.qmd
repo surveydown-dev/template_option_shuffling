@@ -1,0 +1,247 @@
+---
+# The YAML header specifies several settings for the survey but is not required.
+# A full list of settings can be found under _survey/settings.yml directory.
+
+theme-settings:
+  theme: default
+  barposition: top
+  footer-left: "Made with [surveydown](https://surveydown.org)"
+  footer-right: '[<i class="bi bi-github"></i> Source Code](https://github.com/surveydown-dev/template_option_shuffling)'
+
+survey-settings:
+  show-previous: false
+  use-cookies: false
+  auto-scroll: false
+  rate-survey: false
+  system-language: en
+  highlight-unanswered: true
+  highlight-color: blue
+  capture-metadata: true
+  all-shuffled: false
+  shuffled:
+    - fruit_mc
+    - fruit_mc_buttons
+    - fruit_mc_multiple
+    - fruit_mc_multiple_buttons
+    - fruit_mc_buttons_1: [1-4]
+    - fruit_mc_buttons_2: [4-7]
+    - fruit_mc_buttons_3: [1, 3, 7]
+---
+
+```{r}
+library(surveydown)
+```
+
+--- welcome
+
+# Template - Option Shuffling
+
+Hi! This is a showcase of option shuffling that can be applied to multiple choice questions in `{surveydown}`.
+
+The supported question types include:
+
+- `mc`
+- `mc_buttons`
+- `mc_multiple`
+- `mc_multiple_buttons`
+
+--- education
+
+# Usage
+
+To define option shuffling for all questions, set `all-shuffled: true` in the `survey-settings` section of the YAML header, like this:
+
+```yaml
+survey-settings:
+  ...
+  all-shuffled: true
+```
+
+To specify option shuffling for selected questions only, set `shuffled` in the `survey-settings` section of the YAML header, like this:
+
+```yaml
+survey-settings:
+  ...
+  shuffled:
+    - question_id_1
+    - question_id_2
+```
+
+Option shuffling can be precisely defined to selected indices, like this:
+
+```yaml
+survey-settings:
+  ...
+  shuffled:
+    - question_id_1: [1, 2, 4, 7]
+    - question_id_2: [1-5, 8-10]
+```
+
+In the above example, `question_id_1` will have options at indices 1, 2, 4, and 7 shuffled, while `question_id_2` will have options at indices 1 to 5 and 8 to 10 shuffled. If no indices are specified, all options will be shuffled.
+
+--- question_types
+
+This page demonstrates option shuffling in all 4 multiple choice question types.
+
+#### Option shuffling in `type = 'mc'`:
+
+```{r}
+sd_question(
+  id     = 'fruit_mc',
+  type   = 'mc',
+  label  = "Which fruit do you prefer most from this list?",
+  option = c(
+    "Apple"      = "apple",
+    "Banana"     = "banana",
+    "Pear"       = "pear",
+    "Strawberry" = "strawberry",
+    "Grape"      = "grape",
+    "Mango"      = "mango",
+    "Watermelon" = "watermelon"
+  )
+)
+```
+
+#### Option shuffling in `type = 'mc_buttons'`:
+
+```{r}
+sd_question(
+  id     = 'fruit_mc_buttons',
+  type   = 'mc_buttons',
+  label  = "Which fruit do you prefer most from this list?",
+  option = c(
+    "Apple"      = "apple",
+    "Banana"     = "banana",
+    "Pear"       = "pear",
+    "Strawberry" = "strawberry",
+    "Grape"      = "grape",
+    "Mango"      = "mango",
+    "Watermelon" = "watermelon"
+  )
+)
+```
+
+#### Option shuffling in `type = 'mc_multiple'`:
+
+```{r}
+sd_question(
+  id     = 'fruit_mc_multiple',
+  type   = 'mc_multiple',
+  label  = "Pick all your favorite fruits from this list:",
+  option = c(
+    "Apple"      = "apple",
+    "Banana"     = "banana",
+    "Pear"       = "pear",
+    "Strawberry" = "strawberry",
+    "Grape"      = "grape",
+    "Mango"      = "mango",
+    "Watermelon" = "watermelon"
+  )
+)
+```
+
+#### Option shuffling in `type = 'mc_multiple_buttons'`:
+
+```{r}
+sd_question(
+  id     = 'fruit_mc_multiple_buttons',
+  type   = 'mc_multiple_buttons',
+  label  = "Pick all your favorite fruits from this list:",
+  option = c(
+    "Apple"      = "apple",
+    "Banana"     = "banana",
+    "Pear"       = "pear",
+    "Strawberry" = "strawberry",
+    "Grape"      = "grape",
+    "Mango"      = "mango",
+    "Watermelon" = "watermelon"
+  )
+)
+```
+
+--- indices
+
+# Shuffling with Specified Indices
+
+This page demonstrates option shuffling with specified indices using the `mc_buttons` question type.
+
+#### No options shuffled:
+```{r}
+sd_question(
+  id     = 'fruit_mc_buttons_0',
+  type   = 'mc_buttons',
+  label  = "Which fruit do you prefer most from this list?",
+  option = c(
+    "Apple"      = "apple",
+    "Banana"     = "banana",
+    "Pear"       = "pear",
+    "Strawberry" = "strawberry",
+    "Grape"      = "grape",
+    "Mango"      = "mango",
+    "Watermelon" = "watermelon"
+  )
+)
+```
+
+
+#### Options 1-4 shuffled:
+```{r}
+sd_question(
+  id     = 'fruit_mc_buttons_1',
+  type   = 'mc_buttons',
+  label  = "Which fruit do you prefer most from this list?",
+  option = c(
+    "Apple"      = "apple",
+    "Banana"     = "banana",
+    "Pear"       = "pear",
+    "Strawberry" = "strawberry",
+    "Grape"      = "grape",
+    "Mango"      = "mango",
+    "Watermelon" = "watermelon"
+  )
+)
+```
+
+#### Options 4-7 shuffled:
+```{r}
+sd_question(
+  id     = 'fruit_mc_buttons_2',
+  type   = 'mc_buttons',
+  label  = "Which fruit do you prefer most from this list?",
+  option = c(
+    "Apple"      = "apple",
+    "Banana"     = "banana",
+    "Pear"       = "pear",
+    "Strawberry" = "strawberry",
+    "Grape"      = "grape",
+    "Mango"      = "mango",
+    "Watermelon" = "watermelon"
+  )
+)
+```
+
+#### Options 1, 3, 7 shuffled:
+```{r}
+sd_question(
+  id     = 'fruit_mc_buttons_3',
+  type   = 'mc_buttons',
+  label  = "Which fruit do you prefer most from this list?",
+  option = c(
+    "Apple"      = "apple",
+    "Banana"     = "banana",
+    "Pear"       = "pear",
+    "Strawberry" = "strawberry",
+    "Grape"      = "grape",
+    "Mango"      = "mango",
+    "Watermelon" = "watermelon"
+  )
+)
+```
+
+--- end
+
+## Thanks for taking our survey!
+
+```{r}
+sd_close()
+```
