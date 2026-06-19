@@ -4,8 +4,6 @@ A template for creating survey questions with shuffled options.
 
 [![Walkthrough recording](video-thumbnail.png)](https://cdn.jsdelivr.net/gh/surveydown-dev/template_option_shuffling@main/video-recording.mp4)
 
-*Click the image above to play the recording.*
-
 ### Template page
 
 https://surveydown.org/templates/option_shuffling
